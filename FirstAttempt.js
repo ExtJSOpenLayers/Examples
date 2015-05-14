@@ -18,8 +18,6 @@ function init(){
 
     modalWindow();
 
-    createPanel();
-
     map.addControl(selectControl);
 
     selectControl.activate();
