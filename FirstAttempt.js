@@ -16,33 +16,9 @@ function init(){
 
     defineSelectControl();
 
-    var dialog;
-    lakes.events.on({
-        featureselected: function(event) {
-            var feature = event.feature;
-            var area = feature.geometry.getArea();
-            var id = feature.attributes.name;
-            var output = 'Lake: ' + id + '<br> Area: ' + area.toFixed(2);
-            dialog = new Ext.Window({
-                title: "Feature Info",
-                layout: "fit",
-                height: 80, 
-                width: 200,
-                plain: true,
-                items: [{
-                    border: false,
-                    bodyStyle: {
-                        padding: 5, fontSize: 13
-                    },
-                    html: output
-                }]
-            });
-            dialog.show();
-        },
-        featureunselected: function() {
-            dialog.destroy();
-        }
-    });
+    modalWindow();
+
+    createPanel();
 
     map.addControl(selectControl);
 
@@ -127,5 +103,36 @@ function defineStyles(){
         'select': selectStyle
     });
 
+}
+
+function modalWindow(){
+
+    var dialog;
+    lakes.events.on({
+        featureselected: function(event) {
+            var feature = event.feature;
+            var area = feature.geometry.getArea();
+            var id = feature.attributes.name;
+            var output = 'Lake: ' + id + '<br> Area: ' + area.toFixed(2);
+            dialog = new Ext.Window({
+                title: "Feature Info",
+                layout: "fit",
+                height: 80, 
+                width: 200,
+                plain: true,
+                items: [{
+                    border: false,
+                    bodyStyle: {
+                        padding: 5, fontSize: 13
+                    },
+                    html: output
+                }]
+            });
+            dialog.show();
+        },
+        featureunselected: function() {
+            dialog.destroy();
+        }
+    });
 
 }
